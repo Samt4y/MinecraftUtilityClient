@@ -6,7 +6,7 @@ import net.minecraft.util.math.Vec3d;
 
 public final class SpeedModule extends Module {
     private double multiplier = 1.5;
-    public SpeedModule() { super("Speed", "Boosts ground movement speed."); }
+    public SpeedModule() { super("Speed", "Boosts ground movement speed.", ModuleCategory.MOVEMENT); }
     public double multiplier() { return multiplier; }
     public void setMultiplier(double value) { multiplier = Math.clamp(value, 1.0, 3.0); }
 

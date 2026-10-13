@@ -8,7 +8,7 @@ import net.minecraft.util.math.Vec3d;
 public final class FlyModule extends Module {
     private double speed = 1.0;
 
-    public FlyModule() { super("Fly", "Enables flight when the server allows it."); }
+    public FlyModule() { super("Fly", "Directional free-flight with vertical controls.", ModuleCategory.MOVEMENT); }
     public double speed() { return speed; }
     public void setSpeed(double speed) { this.speed = Math.clamp(speed, 0.1, 5.0); }
 
@@ -22,8 +22,9 @@ public final class FlyModule extends Module {
         double yaw = Math.toRadians(player.getYaw());
         double length = Math.max(1.0, Math.sqrt(forward * forward + sideways * sideways));
         double horizontalSpeed = 0.18 * speed;
-        double x = (-Math.sin(yaw) * forward + Math.cos(yaw) * sideways) / length * horizontalSpeed;
-        double z = (Math.cos(yaw) * forward + Math.sin(yaw) * sideways) / length * horizontalSpeed;
+        // Minecraft yaw 0 faces south, therefore right movement points toward negative X.
+        double x = (-Math.sin(yaw) * forward - Math.cos(yaw) * sideways) / length * horizontalSpeed;
+        double z = (Math.cos(yaw) * forward - Math.sin(yaw) * sideways) / length * horizontalSpeed;
         double y = ((client.options.jumpKey.isPressed() ? 1 : 0) - (client.options.sneakKey.isPressed() ? 1 : 0)) * horizontalSpeed;
         player.setVelocity(new Vec3d(x, y, z));
     }

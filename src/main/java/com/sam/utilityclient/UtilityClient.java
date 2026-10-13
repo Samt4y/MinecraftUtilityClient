@@ -7,6 +7,10 @@ import com.sam.utilityclient.module.ModuleManager;
 import com.sam.utilityclient.module.ReachModule;
 import com.sam.utilityclient.module.SpeedModule;
 import com.sam.utilityclient.module.AutoSprintModule;
+import com.sam.utilityclient.module.AntiAfkModule;
+import com.sam.utilityclient.module.AutoRespawnModule;
+import com.sam.utilityclient.module.FastPlaceModule;
+import com.sam.utilityclient.module.FullbrightModule;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
@@ -29,6 +33,10 @@ public final class UtilityClient implements ClientModInitializer {
         MODULES.register(new AutoSprintModule());
         MODULES.register(new ReachModule());
         MODULES.register(new AutoClickModule());
+        MODULES.register(new FastPlaceModule());
+        MODULES.register(new AutoRespawnModule());
+        MODULES.register(new AntiAfkModule());
+        MODULES.register(new FullbrightModule());
 
         openGuiKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 "key.utilityclient.open_gui", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_RIGHT_SHIFT,

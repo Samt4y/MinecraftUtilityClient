@@ -9,7 +9,7 @@ public final class AutoClickModule extends Module {
     private long nextClickNanos;
     private boolean releaseAttackNextTick;
 
-    public AutoClickModule() { super("Auto Click", "Repeats the normal attack action while held."); }
+    public AutoClickModule() { super("Auto Click", "Repeats normal attack input while held.", ModuleCategory.COMBAT); }
     public int clicksPerSecond() { return clicksPerSecond; }
     public void setClicksPerSecond(int clicksPerSecond) { this.clicksPerSecond = Math.clamp(clicksPerSecond, 1, 20); }
 
