@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "utilityclient",
+  "version": "${version}",
+  "name": "Utility Client",
+  "description": "A configurable client-side module menu.",
+  "authors": ["Sam"],
+  "environment": "client",
+  "entrypoints": {
+    "client": ["com.sam.utilityclient.UtilityClient"]
+  },
+  "mixins": ["utilityclient.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.18.4",
+    "fabric-api": "*",
+    "minecraft": "1.21.11",
+    "java": ">=21"
+  }
+}
