@@ -14,9 +14,13 @@ import com.sam.utilityclient.module.FullbrightModule;
 import com.sam.utilityclient.module.AimAssistModule;
 import com.sam.utilityclient.module.KillAuraModule;
 import com.sam.utilityclient.module.HitboxesModule;
+import com.sam.utilityclient.module.EspModule;
+import com.sam.utilityclient.module.TracersModule;
+import com.sam.utilityclient.render.EntityOverlayRenderer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.fabric.api.client.rendering.v1.world.WorldRenderEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
@@ -43,12 +47,15 @@ public final class UtilityClient implements ClientModInitializer {
         MODULES.register(new AutoRespawnModule());
         MODULES.register(new AntiAfkModule());
         MODULES.register(new FullbrightModule());
+        MODULES.register(new EspModule());
+        MODULES.register(new TracersModule());
 
         openGuiKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 "key.utilityclient.open_gui", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_RIGHT_SHIFT,
                 Category.create(Identifier.of("utilityclient", "general"))));
 
         ClientTickEvents.END_CLIENT_TICK.register(this::onEndClientTick);
+        WorldRenderEvents.AFTER_ENTITIES.register(EntityOverlayRenderer::render);
     }
 
     private void onEndClientTick(MinecraftClient client) {
