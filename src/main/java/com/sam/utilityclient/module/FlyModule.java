@@ -16,6 +16,8 @@ public final class FlyModule extends Module {
     public void tick(MinecraftClient client) {
         ClientPlayerEntity player = client.player;
         if (player == null) return;
+        player.getAbilities().flying = true;
+        player.getAbilities().setFlySpeed((float) (0.05 * speed));
         player.setNoGravity(true);
         double forward = (client.options.forwardKey.isPressed() ? 1 : 0) - (client.options.backKey.isPressed() ? 1 : 0);
         double sideways = (client.options.rightKey.isPressed() ? 1 : 0) - (client.options.leftKey.isPressed() ? 1 : 0);
@@ -31,6 +33,10 @@ public final class FlyModule extends Module {
 
     @Override
     protected void onDisable(MinecraftClient client) {
-        if (client.player != null) client.player.setNoGravity(false);
+        if (client.player != null) {
+            client.player.setNoGravity(false);
+            client.player.getAbilities().flying = false;
+            client.player.getAbilities().setFlySpeed(0.05f);
+        }
     }
 }
